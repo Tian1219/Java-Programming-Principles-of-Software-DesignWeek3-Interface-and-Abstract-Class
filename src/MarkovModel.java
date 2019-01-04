@@ -29,7 +29,7 @@ public class MarkovModel extends AbstractMarkovModel{
         sb.append(key);
 
 
-        for(int k=0; k < numChars-4; k++){
+        for(int k=0; k < numChars-keyLength; k++){
             ArrayList<String> follows = getFollows(key);
             if (follows.size()==0){break;}
 

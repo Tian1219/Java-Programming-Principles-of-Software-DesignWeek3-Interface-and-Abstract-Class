@@ -10,6 +10,8 @@ import edu.duke.*;
 
 public class MarkovRunnerWithInterface {
     public void runModel(IMarkovModel markov, String text, int size,int seed) {
+
+    	long startTime = System.nanoTime();
         markov.setTraining(text);
 		markov.setRandom(seed);
         System.out.println("running with " + markov);
@@ -17,7 +19,12 @@ public class MarkovRunnerWithInterface {
 			String st= markov.getRandomText(size);
 			printOut(st);
 		}
-    }
+
+		long endTime = System.nanoTime();
+		long timeElaspsed = (endTime - startTime);
+		System.out.println("the run took: " + timeElaspsed);
+
+	}
     
     public void runMarkov() {
         FileResource fr = new FileResource();
@@ -54,5 +61,16 @@ public class MarkovRunnerWithInterface {
 		}
 		System.out.println("\n----------------------------------");
 	}
-	
+
+
+	public void testHashMap(){
+    	FileResource fr = new FileResource();
+    	String st = fr.asString();
+    	st = st.replace('\n', ' ');
+    	int size = 615;
+    	int seed = 50;
+
+    	EfficientMarkovModel emFive = new EfficientMarkovModel(5);
+		runModel(emFive, st, size, seed);
+	}
 }
